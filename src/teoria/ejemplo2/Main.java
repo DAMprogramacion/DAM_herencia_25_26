@@ -10,5 +10,9 @@ public class Main {
         Producto producto2 = new ProductoAlimentacion("002", "galletas",
                 5.3, true, LocalDate.of(2030, 1, 20) );
         System.out.println(producto2);
+        Producto productoAEliminar = new ProductoDrogueria( "001", null,
+                0, null);
+        System.out.println(productoAEliminar == producto1);
+        System.out.println(productoAEliminar.equals(producto1));
     }
 }
