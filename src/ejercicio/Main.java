@@ -27,5 +27,6 @@ public class Main {
         Profesor profesorInterino = new ProfesorInterino("12345678B", LocalDate.of(2000, 12, 1),
                 "marisa perales ruíz", Especialidad.EDUCACION_FISICA, 5);
         System.out.println(profesorInterino);
+        System.out.println("==========CLAUSTRO================");
     }
 }
