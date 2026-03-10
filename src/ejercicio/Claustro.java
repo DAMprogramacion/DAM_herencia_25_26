@@ -27,10 +27,10 @@ public class Claustro {
         return profesores.get(dni);
     }
     public void addProfesor(Profesor profesor){
-        profesores.put(profesor.getDni(), profesor);
+        profesores.put(profesor.getDni().toLowerCase(), profesor);
     }
     public boolean eliminarProfesor(String dni) {
-        return profesores.remove(dni) != null;
+        return profesores.remove(dni.toLowerCase()) != null;
     }
     //OTROS METODOS
     public double calcularEdadMediaProfesores () {
@@ -85,12 +85,29 @@ public class Claustro {
         for (Profesor profesor : profesores.values()) {
             sBuilder.append(++contador).append(".- ");
             if (profesor instanceof ProfesorTitular){
-                sBuilder.append("Profesor titular\n");
+                sBuilder.append("Profesor titular: ");
+                sBuilder.append(profesor.getNombrePersona()).append(", ").
+                        append(profesor.getDni()).append(", ").
+                        append(profesor.getEspecialidad());
+                ProfesorTitular pTitular = (ProfesorTitular) profesor;
+                int[] tiempoContrato = Helper.calcularAntiguedad(pTitular.getFechaIncorporacion());
+                sBuilder.append("\nantigüedad: ").append(tiempoContrato[0]).append(" años, ").
+                        append(tiempoContrato[1]).append(" meses, ").
+                        append(tiempoContrato[2]).append(" días\n");
+
             } else {
-                sBuilder.append("Profesor interino\n");
+                sBuilder.append("Profesor interino: ");
+                sBuilder.append(profesor.getNombrePersona()).append(", ").
+                        append(profesor.getDni()).append(", ").
+                        append(profesor.getEspecialidad());
+                ProfesorInterino pInterino = (ProfesorInterino) profesor;
+                sBuilder.append("\nmeses de contratación: ").
+                        append(pInterino.getMesesContratacion()).append('\n');
             }
+
+
         }
 
-        return super.toString();
+        return sBuilder.toString();
     }
 }
